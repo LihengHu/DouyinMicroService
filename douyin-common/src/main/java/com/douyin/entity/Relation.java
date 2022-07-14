@@ -12,5 +12,5 @@ public class Relation {
     private int followerId;
     private int status;
     private Date createTime;
-    private Data updateTime;
+    private Date updateTime;
 }
