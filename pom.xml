@@ -51,7 +51,8 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-sleuth -->
+
+
     </dependencies>
   </dependencyManagement>
 

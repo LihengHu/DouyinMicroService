@@ -1,4 +1,4 @@
 package com.douyin.entity;
 
-public class User {
+public class Video {
 }
