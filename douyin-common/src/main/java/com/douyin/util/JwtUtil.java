@@ -25,7 +25,7 @@ public class JwtUtil {
      *subject：主题
      *ttlMillis：有效期	传null的话，默认1小时
      **/
-    public static String createJWT(String id, String subject, Long ttlMillis , HashMap<String,Object> claims) {
+    public static String createJWT(String id, String subject, Long ttlMillis , Object userId) {
         //指定算法
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -54,7 +54,7 @@ public class JwtUtil {
                 .setIssuedAt(now)             // 签发时间
                 .signWith(signatureAlgorithm, secretKey) // 签名算法以及密匙
                 .setExpiration(expDate)
-                .addClaims(claims);      // 设置过期时间
+                .claim("userId",userId);      // 设置过期时间
         return builder.compact();
     }
 

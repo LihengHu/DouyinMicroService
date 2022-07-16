@@ -5,15 +5,24 @@
 <mapper namespace="com.douyin.Dao.UserMapper">
 
     <sql id="insertFields">
-        
+        name , username, password,follow_count,follower_count,salt
     </sql>
     
     <sql id="selectFields">
-        id, name , username, password,follow_count,follower_count
+        id, name , username, password,follow_count,follower_count,salt
     </sql>
+    <insert id="insertUser">
+        insert into user (<include refid="insertFields"></include>)
+        values(#{name} , #{username}, #{password} ,#{followCount} ,#{followerCount},#{salt})
+    </insert>
     <select id="selectByName" resultType="com.douyin.entity.User">
         select <include refid="selectFields"></include>
         from user
         where username = #{username}
+    </select>
+    <select id="selectById" resultType="com.douyin.entity.User">
+        select <include refid="selectFields"></include>
+        from user
+        where id = #{id}
     </select>
 </mapper>

@@ -10,4 +10,5 @@ public class User {
     private String password;
     private int followCount;
     private int followerCount;
+    private String salt;
 }
