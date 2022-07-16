@@ -11,6 +11,7 @@
   <modules>
     <module>douyin-common</module>
     <module>api-gateway</module>
+    <module>douyin-auth</module>
   </modules>
 
   <name>DouyinMicroService</name>
@@ -44,6 +45,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <!--鉴权-->
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt</artifactId>
+        <version>0.9.0</version>
+      </dependency>
+
       <dependency>
         <groupId>com.alibaba.cloud</groupId>
         <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -51,6 +59,7 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
 
 
     </dependencies>
