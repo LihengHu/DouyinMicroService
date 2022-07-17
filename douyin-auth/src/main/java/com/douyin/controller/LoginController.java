@@ -34,9 +34,7 @@ public class LoginController {
         if(user == null){
             return JsonUtil.getJSONString(1,"用户不存在",null);
         }
-        System.out.println("password: "+password);
         password = EncryptUtil.md5(password + user.getSalt());
-        System.out.println("password: "+password);
         if (!password.equals(user.getPassword())){
             return JsonUtil.getJSONString(1,"密码错误",null);
         }
