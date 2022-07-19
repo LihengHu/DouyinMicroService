@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.douyin.Dao.RelationMapper">
+
+    <insert id="insertRelation">
+        insert into relation(follower1 ,follower2 ,status)
+        values (#{follower1},#{follower2} ,#{status})
+        on duplicate key update status = status|1
+    </insert>
+</mapper>
