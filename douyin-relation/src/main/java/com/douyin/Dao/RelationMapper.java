@@ -6,4 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface RelationMapper {
 
     int insertRelation(int follower1,int follower2,int status);
+
+    int selectStatus(int follower1,int follower2);
+
+    int updateStatus(int follower1,int follower2 , int status);
 }

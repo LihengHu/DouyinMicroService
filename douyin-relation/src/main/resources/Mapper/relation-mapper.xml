@@ -7,6 +7,14 @@
     <insert id="insertRelation">
         insert into relation(follower1 ,follower2 ,status)
         values (#{follower1},#{follower2} ,#{status})
-        on duplicate key update status = status|1
+        on duplicate key update status = status + 1
     </insert>
+    <update id="updateStatus">
+        update relation set status = #{status} where follower1 = #{follower1} and follower2 = #{follower2}
+    </update>
+    <select id="selectStatus" resultType="java.lang.Integer">
+        select status from relation
+        where follower1 = #{follower1}
+        and follower2 = #{follower2}
+    </select>
 </mapper>

@@ -1,11 +1,11 @@
 package com.douyin.controller;
 
+
 import com.douyin.entity.User;
 import com.douyin.service.UserService;
 import com.douyin.util.EncryptUtil;
 import com.douyin.util.JsonUtil;
 import com.douyin.util.JwtUtil;
-import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String login(String username ,String password) throws Exception {
         HashMap<String,Object> map = new HashMap<>();
         if(StringUtils.isBlank(username)){

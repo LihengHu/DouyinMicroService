@@ -11,7 +11,7 @@
     <sql id="selectFields">
         id, name , username, password,follow_count,follower_count,salt
     </sql>
-    <insert id="insertUser">
+    <insert id="insertUser" keyProperty="id">
         insert into user (<include refid="insertFields"></include>)
         values(#{name} , #{username}, #{password} ,#{followCount} ,#{followerCount},#{salt})
     </insert>
