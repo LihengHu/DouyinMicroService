@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.douyin.Dao.VideoMapper">
+
+    <sql id="insertFields">
+        u_id , play_url, cover_url,title,favorite_count,comment_count, create_time
+    </sql>
+
+    <sql id="selectFields">
+        id, u_id , play_url, cover_url,title,favorite_count,comment_count, create_time
+    </sql>
+    <insert id="addVideo" parameterType="com.douyin.entity.Video" >
+        insert into videos (<include refid="insertFields"></include>)
+        values(#{uId} , #{playUrl}, #{coverUrl} ,#{title} ,#{favoriteCount},#{commentCount},#{createTime})
+    </insert>
+
+    <select id="selectById" resultType="com.douyin.entity.Video">
+        select <include refid="selectFields"></include>
+        from videos
+        where id = #{id}
+    </select>
+
+    <select id="getFeeds" parameterType="java.util.Date" resultType="int">
+        SELECT id FROM videos WHERE create_time  &lt; #{lastTime}
+
+                LIMIT 10
+    </select>
+
+    <select id="getPublishList" parameterType="int" resultType="int">
+        SELECT id FROM videos WHERE u_id = #{uId}
+    </select>
+
+</mapper>

@@ -12,6 +12,8 @@
     <module>douyin-common</module>
     <module>api-gateway</module>
     <module>douyin-auth</module>
+      <module>video</module>
+    <module>douyin-relation</module>
     <module>douyin-relation</module>
   </modules>
 

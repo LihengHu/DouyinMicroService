@@ -1,9 +1,10 @@
 server:
-  port: 80
+  port: 8090
 
 spring:
   application:
-    name: service-auth
+    name: service-video
+
 
   datasource:
     username: root
@@ -22,3 +23,12 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true
+
+
+#    七牛云配置
+oos:
+  qiniu:
+    domain:  rf7op4z1g.hn-bkt.clouddn.com # 访问域名(默认使用七牛云测试域名)
+    accessKey: k49Y9sWMcyOuUVfGhtl3OcyJ87YdvNGrHPhNICv4 # 公钥
+    secretKey: G2F8A2GQQyEB1uj2vZHpeo_ht8aMgmIx0P1RP9E7 # 私钥
+    bucketName: douyinpicture  #存储空间名称

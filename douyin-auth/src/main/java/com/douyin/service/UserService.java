@@ -35,6 +35,7 @@ public class UserService {
         user.setFollowCount(0);
         user.setFollowerCount(0);
         userMapper.insertUser(user);
+
         map.put("userId",user.getId());
         return map;
     }
