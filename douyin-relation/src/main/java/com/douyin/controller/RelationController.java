@@ -19,12 +19,19 @@ public class RelationController {
     public String action(String token,int to_user_id,int action_type) throws Exception {
         Claims claims = JwtUtil.parseJWT(token);
         int userId = (int) claims.get("userId");
-        System.out.println(userId);
         if(action_type == 1){
             relationService.focus(userId,to_user_id,action_type);
         }else {
             relationService.unfocus(userId,to_user_id);
         }
         return JsonUtil.getJSONString(0,"操作成功");
+    }
+
+    @GetMapping("/follow/list")
+    public String followList(String token) throws Exception {
+        Claims claims = JwtUtil.parseJWT(token);
+        int userId = (int) claims.get("userId");
+
+        return "";
     }
 }

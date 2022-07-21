@@ -3,6 +3,7 @@ package com.douyin.service;
 import com.alibaba.nacos.shaded.io.grpc.netty.shaded.io.netty.util.internal.StringUtil;
 import com.douyin.Dao.UserMapper;
 import com.douyin.entity.User;
+import com.douyin.entity.UserInfo;
 import com.douyin.util.EncryptUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class UserService {
 
     @Autowired
     UserMapper userMapper;
-     public User findUserByName(String username){
+    public User findUserByName(String username){
         return userMapper.selectByName(username);
     }
 
@@ -37,4 +38,16 @@ public class UserService {
         map.put("userId",user.getId());
         return map;
     }
+
+    public UserInfo finUserInfoById(int userId){
+        User user = userMapper.selectById(userId);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(user.getId());
+        userInfo.setFollow_count(user.getFollowCount());
+        userInfo.setFollower_count(user.getFollowerCount());
+        userInfo.setName("name");
+        userInfo.setIs_follow(true);
+        return userInfo;
+    }
+
 }

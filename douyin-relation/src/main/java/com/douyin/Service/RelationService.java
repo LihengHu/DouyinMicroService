@@ -4,6 +4,8 @@ import com.douyin.Dao.RelationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RelationService {
 
@@ -38,6 +40,14 @@ public class RelationService {
                 relationMapper.updateStatus(follower2,follower1,1);
             }
         }
+    }
+
+    public void findFollowList(int userId){
+        List<Integer> follows = relationMapper.selectFollowList(userId);
+    }
+
+    public void findFollowerList(int userId){
+        relationMapper.selectFollowerList(userId);
     }
 
 }
