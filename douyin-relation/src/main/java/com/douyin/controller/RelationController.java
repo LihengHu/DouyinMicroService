@@ -55,8 +55,15 @@ public class RelationController {
     public String followerList(String token) throws Exception {
         Claims claims = JwtUtil.parseJWT(token);
         int userId = (int) claims.get("userId");
-
-        return "";
+        List<Integer> followerList = relationService.findFollowerList(userId);
+        List<UserInfo> users = new ArrayList<>();
+        for(int followerId : followerList){
+            UserInfo userInfo = userService.finUserInfoById(followerId);
+            users.add(userInfo);
+        }
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("user_list",users);
+        return JsonUtil.getJSONString(0,"获取粉丝列表成功",map);
     }
 
 

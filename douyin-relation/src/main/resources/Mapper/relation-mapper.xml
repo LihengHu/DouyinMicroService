@@ -19,10 +19,10 @@
     </select>
     <select id="selectFollowList" resultType="java.lang.Integer">
         select follower1 from relation
-        where follower2 = #{userId} and status = 2 or status = 3
+        where follower2 = #{userId} and (status = 2 or status = 3)
         Union ALL
         select follower2 from relation
-        where follower1 = #{userId} and status = 1 or status = 3
+        where follower1 = #{userId} and (status = 1 or status = 3)
     </select>
     <select id="selectFollowerList" resultType="java.lang.Integer">
         select follower1 from relation
