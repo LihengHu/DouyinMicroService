@@ -14,13 +14,6 @@ spring:
           filters: # 过滤器,请求在传递过程中可以通过过滤器对其进行一定的修改
             - StripPrefix=2 # 转发之前去掉2层路径 即去掉/douyin/user 真实访问地址为localhost:80/login
 
-        - id: order_route
-          uri: lb://service-order
-          order: 1
-          predicates:
-            - Path=/order-serv/**
-          filters:
-            - StripPrefix=1
       discovery:
         locator:
           enabled: true #让geteway从nacos获取服务信息

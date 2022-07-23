@@ -5,9 +5,14 @@ spring:
   application:
     name: service-auth
 
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
   datasource:
     username: root
-    password: ran123456
+    password: root
     hikari:
       maximum-pool-size: 20
       minimum-idle: 5

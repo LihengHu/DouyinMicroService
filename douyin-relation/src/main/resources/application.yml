@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: service-relation
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
 
   datasource:
     username: root
@@ -22,3 +26,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true
+
+service-auth: #调用者名称
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

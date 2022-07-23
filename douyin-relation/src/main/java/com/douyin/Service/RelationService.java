@@ -1,6 +1,7 @@
 package com.douyin.Service;
 
 import com.douyin.Dao.RelationMapper;
+import com.douyin.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,12 +43,13 @@ public class RelationService {
         }
     }
 
-    public void findFollowList(int userId){
+    public List<Integer> findFollowList(int userId){
         List<Integer> follows = relationMapper.selectFollowList(userId);
+        return follows;
     }
 
-    public void findFollowerList(int userId){
-        relationMapper.selectFollowerList(userId);
+    public List<Integer> findFollowerList(int userId){
+        return relationMapper.selectFollowerList(userId);
     }
 
 }
