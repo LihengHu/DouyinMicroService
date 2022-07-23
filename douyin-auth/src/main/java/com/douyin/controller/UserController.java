@@ -28,4 +28,12 @@ public class UserController {
         return JsonUtil.getJSONString(0,"获取用户信息成功",map);
     }
 
+    @GetMapping("/userInfo")
+    public String getUserInfo(int userId){
+        UserInfo user = userService.finUserInfoById(userId);
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("user",user);
+        return JsonUtil.getJSONString(0,"获取用户信息成功",map);
+    }
+
 }

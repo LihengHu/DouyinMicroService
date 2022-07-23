@@ -133,9 +133,7 @@ public class VideoController {
     public String getPublishList(@RequestParam(name = "user_id") Integer uid){
         if (uid == null || uid == 0)
             return JsonUtil.getJSONString(404,"没有用户id");
-
         //判断用户是否存在 ******
-
         List<Video> videoList = videoService.getPublishList(uid);
         System.out.println(videoList.size()+"*********");
         if (videoList == null ||videoList.size()<=0){

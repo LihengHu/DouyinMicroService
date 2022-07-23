@@ -105,6 +105,10 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <!--            <version>ds</version>-->
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
 
     </dependencies>
 
