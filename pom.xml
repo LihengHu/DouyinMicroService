@@ -15,6 +15,7 @@
       <module>video</module>
     <module>douyin-relation</module>
     <module>douyin-relation</module>
+      <module>douyin-favourite</module>
   </modules>
 
   <name>DouyinMicroService</name>
