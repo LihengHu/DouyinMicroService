@@ -14,7 +14,7 @@
     <module>douyin-auth</module>
       <module>video</module>
     <module>douyin-relation</module>
-    <module>douyin-relation</module>
+    <module>douyin-discuss</module>
       <module>douyin-favourite</module>
   </modules>
 

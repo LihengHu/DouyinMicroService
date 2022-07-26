@@ -2,14 +2,17 @@ package com.douyin.controller;
 
 
 import com.douyin.entity.User;
+import com.douyin.entity.UserInfo;
 import com.douyin.entity.Video;
-import com.douyin.entity.extend.VideoExtend;
 import com.douyin.service.QiniuService;
+import com.douyin.service.UserService;
 import com.douyin.service.VideoService;
 import com.douyin.util.JsonUtil;
+import com.douyin.util.JwtUtil;
 import com.douyin.utils.FFmpegUtils;
 import com.douyin.utils.IOUtil;
 import com.douyin.utils.QIniuUtils;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,10 +33,18 @@ public class VideoController {
     @Autowired
     private  QiniuService qiniuService;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping("/douyin/publish/action")
-    public String publish(HttpServletRequest request)  {
+    public String publish(HttpServletRequest request,String token) throws Exception {
 
         MultipartHttpServletRequest params=((MultipartHttpServletRequest) request);
+
+        Claims claims = JwtUtil.parseJWT(token);
+        int userId = (int) claims.get("userId");
+
+
 
         MultipartFile file = params.getFile("data");  //视频文件
         String title=params.getParameter("title");  //视频标题
@@ -110,11 +121,7 @@ public class VideoController {
 
         List<Video> reVideoList = new ArrayList<>();
         for (Video video : videoList){
-            User user = new User();
-            user.setFollowCount(11);
-            user.setFollowerCount(55);
-            user.setName("王五");
-            user.setUsername("aaa");
+            UserInfo user = userService.getUserInfo(video.getUId());
             video.setAuthor(user);
             reVideoList.add(video);
 
@@ -130,9 +137,10 @@ public class VideoController {
     }
 
     @GetMapping("/douyin/publish/list/")
-    public String getPublishList(@RequestParam(name = "user_id") Integer uid){
+    public String getPublishList(@RequestParam(name = "user_id") Integer uid ){
         if (uid == null || uid == 0)
             return JsonUtil.getJSONString(404,"没有用户id");
+
         //判断用户是否存在 ******
         List<Video> videoList = videoService.getPublishList(uid);
         System.out.println(videoList.size()+"*********");
@@ -141,14 +149,12 @@ public class VideoController {
         }
 
         List<Video> reVideoList = new ArrayList<>();
+        UserInfo userInfo = userService.getUserInfo(uid);
+
         for (Video video : videoList){
             // 获取用户信息   **************
-            User user = new User();
-            user.setFollowCount(11);
-            user.setFollowerCount(55);
-            user.setName("王五");
-            user.setUsername("aaa");
-            video.setAuthor(user);
+
+            video.setAuthor(userInfo);
             reVideoList.add(video);
 
         }

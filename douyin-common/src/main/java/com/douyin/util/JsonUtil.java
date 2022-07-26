@@ -8,8 +8,8 @@ import java.util.Map;
 public class JsonUtil {
     public static String getJSONString(int code, String msg , Map<String,Object> map){
         JSONObject json = new JSONObject();
-        json.put("code",code);
-        json.put("msg",msg);
+        json.put("status_code",code);
+        json.put("status_msg",msg);
         if(map != null){
             for (String key:
                     map.keySet()) {

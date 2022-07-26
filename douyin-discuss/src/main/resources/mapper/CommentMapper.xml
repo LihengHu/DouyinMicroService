@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.douyin.dao.CommentMapper">
+
+    <sql id="insertFields">
+        u_id ,v_id,content, create_time
+    </sql>
+
+    <sql id="selectFields">
+        id, u_id ,v_id,content, create_time
+    </sql>
+    <insert id="addComment" parameterType="com.douyin.entity.Comment" >
+        insert into comment (<include refid="insertFields"></include>)
+        values(#{uId} , #{vId}, #{content} ,#{createTime} )
+    </insert>
+
+    <select id="selectAllByvId" resultType="com.douyin.entity.Comment">
+        select <include refid="selectFields"></include>
+        from comment
+        where v_id = #{vId}
+    </select>
+
+
+    <delete id="removeById" parameterType="int"   >
+        DELETE  FROM `comment` WHERE id = #{id}
+    </delete>
+
+</mapper>

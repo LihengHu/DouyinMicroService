@@ -1,14 +1,10 @@
 server:
-  port: 80
+  port: 8060
 
 spring:
   application:
-    name: service-auth
+    name: service-comment
 
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
 
   datasource:
     username: root
@@ -27,3 +23,5 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     use-generated-keys: true
+
+

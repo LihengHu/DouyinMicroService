@@ -10,11 +10,10 @@ public class Video {
     @JSONField(name = "id")
     private int id;
 
-    @JSONField(name = "id")
     private int uId;
 
     @JSONField(name = "author")
-    private User author;
+    private UserInfo author;
 
     @JSONField(name = "play_url")
     private String playUrl;
@@ -35,6 +34,6 @@ public class Video {
     private Date createTime;
 
     @JSONField(name = "is_favorite")
-    private Boolean favorite;
+    private Boolean favorite = false;
 
 }
