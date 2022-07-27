@@ -23,7 +23,7 @@ public class CommentController {
 
     @PostMapping("/douyin/comment/action/")
     public String doComment(@RequestParam("video_id") int vId, @RequestParam("action_type") int actionType ,@RequestParam(name = "comment_text" ,required = false) String content
-    ,@RequestParam(name = "comment_id",required = false) int commentId
+    ,@RequestParam(name = "comment_id",required = false) int commentId , String token
     ){
 
         //判断视频是否存在
@@ -79,7 +79,7 @@ public class CommentController {
 
     @GetMapping("/douyin/comment/list/")
 
-    public String getComments(@RequestParam("video_id") int vId){
+    public String getComments(@RequestParam("video_id") int vId , String token){
 
         List<Comment> comments = commentService.selectComments(vId);
         if (comments == null || comments.size() <= 0)

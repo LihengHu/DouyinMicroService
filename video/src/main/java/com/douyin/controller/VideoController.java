@@ -109,7 +109,7 @@ public class VideoController {
     }
 
     @GetMapping("/douyin/feed")
-    public String getFeed(@RequestParam(defaultValue = "0")  long latest_time ){
+    public String getFeed(@RequestParam(defaultValue = "0")  long latest_time , String token){
 
         if (latest_time == 0l){  //如果前端没有传入时间戳，则使用当前时间
             latest_time = new Date().getTime();
@@ -137,7 +137,7 @@ public class VideoController {
     }
 
     @GetMapping("/douyin/publish/list/")
-    public String getPublishList(@RequestParam(name = "user_id") Integer uid ){
+    public String getPublishList(@RequestParam(name = "user_id") Integer uid ,String token){
         if (uid == null || uid == 0)
             return JsonUtil.getJSONString(404,"没有用户id");
 
