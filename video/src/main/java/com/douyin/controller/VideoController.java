@@ -120,13 +120,26 @@ public class VideoController {
         if (videoList == null)
             return JsonUtil.getJSONString(200,"暂时没有数据");
 
-        List<Video> reVideoList = new ArrayList<>();
+        List<VideoInfo> reVideoList = new ArrayList<>();
         for (Video video : videoList){
-            UserInfo user = userService.getUserInfo(video.getUId());
-            video.setAuthor(user);
-            reVideoList.add(video);
+            UserInfo userInfo = userService.getUserInfo(video.getUId());
+            if (userInfo == null)
+                continue;
+            VideoInfo videoInfo = new VideoInfo();
+            videoInfo.setId(video.getId());
+            videoInfo.setAuthor(userInfo);
+            videoInfo.setCoverUrl(video.getCoverUrl());
+            videoInfo.setPlayUrl(video.getPlayUrl());
+            videoInfo.setCommentCount(video.getCommentCount());
+            videoInfo.setFavoriteCount(video.getFavoriteCount());
+
+//            boolean isLike = likeService.isLikeVideo(vid,uid);
+
+            videoInfo.setFavorite(video.getFavorite());
+            videoInfo.setTitle(video.getTitle());
+            reVideoList.add(videoInfo);
         }
-        long lastTime =  reVideoList.get(0).getCreateTime().getTime();
+        long lastTime =  videoList.get(0).getCreateTime().getTime();
         HashMap<String,Object> map = new HashMap<>();
         map.put("next_time",lastTime);
         map.put("video_list",reVideoList);
@@ -192,6 +205,14 @@ public class VideoController {
 
         videoInfo.setId(-1);  //videoInfo id 为 -1 则视频信息获取失败
         return videoInfo;
+    }
+
+    @GetMapping("/douyin/hasVIdeo")
+    public Boolean hasVideo(int vId){
+        Video video =  videoService.selectVideoById(vId);
+        if (video == null)
+            return false;
+        return true;
     }
 }
 
