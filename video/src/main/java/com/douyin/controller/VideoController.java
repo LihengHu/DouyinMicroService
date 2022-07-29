@@ -4,6 +4,7 @@ package com.douyin.controller;
 import com.douyin.entity.User;
 import com.douyin.entity.UserInfo;
 import com.douyin.entity.Video;
+import com.douyin.entity.VideoInfo;
 import com.douyin.service.QiniuService;
 import com.douyin.service.UserService;
 import com.douyin.service.VideoService;
@@ -164,4 +165,34 @@ public class VideoController {
 
         return JsonUtil.getJSONString(200,"查询成功",map);
     }
+
+    @GetMapping("/douyin/publish/get/video")
+    public VideoInfo getVideoById(int vId){
+
+        Video video =  videoService.selectVideoById(vId);
+        VideoInfo videoInfo = new VideoInfo();
+
+        if (video != null){
+            UserInfo userInfo = userService.getUserInfo(video.getUId());
+            if (userInfo == null){
+                videoInfo.setId(-1);  //videoInfo id 为 -1 则视频信息获取失败
+                return videoInfo;
+            }
+
+            videoInfo.setId(video.getId());
+            videoInfo.setAuthor(userInfo);
+            videoInfo.setCoverUrl(video.getCoverUrl());
+            videoInfo.setPlayUrl(video.getPlayUrl());
+            videoInfo.setCommentCount(video.getCommentCount());
+            videoInfo.setFavoriteCount(video.getFavoriteCount());
+            videoInfo.setFavorite(video.getFavorite());
+            videoInfo.setTitle(video.getTitle());
+
+            return videoInfo;
+        }
+
+        videoInfo.setId(-1);  //videoInfo id 为 -1 则视频信息获取失败
+        return videoInfo;
+    }
 }
+

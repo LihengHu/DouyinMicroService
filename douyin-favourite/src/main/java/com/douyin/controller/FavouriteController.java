@@ -7,7 +7,7 @@ import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 
-public class FavouriteController {
+public class  FavouriteController {
 
     @Autowired
     FavouriteService favouriteService;
