@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.douyin.Dao.FavouriteMapper">
+
+    <sql id="insertFields">
+        user_id, video_id
+    </sql>
+
+    <insert id="insertVideoId">
+        insert into likes(<include refid="insertFields"></include>)
+        values (#{userId},#{videoId})
+    </insert>
+
+    <update id="updateStatus">
+        update likes set cancel = #{cancel} where user_id = #{userId} and video_id = #{videoId}
+    </update>
+
+
+    <select id="selectUserIdByVideoId" resultType="java.lang.Integer">
+        select user_id from likes
+        where video_id = #{videoId}
+        and cancel = 0
+    </select>
+    <select id="selectVideoIdByUserId" resultType="java.lang.Integer">
+        select video_id from likes
+        where user_id = #{userId}
+          and cancel = 0
+    </select>
+</mapper>

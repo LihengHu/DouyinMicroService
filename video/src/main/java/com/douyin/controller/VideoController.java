@@ -125,7 +125,6 @@ public class VideoController {
             UserInfo user = userService.getUserInfo(video.getUId());
             video.setAuthor(user);
             reVideoList.add(video);
-
         }
         long lastTime =  reVideoList.get(0).getCreateTime().getTime();
         HashMap<String,Object> map = new HashMap<>();
