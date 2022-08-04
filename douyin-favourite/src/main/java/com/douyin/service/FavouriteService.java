@@ -39,16 +39,18 @@ public class FavouriteService {
         }
     }
 
-    public void list(int userId){
+    public List<Integer> list(int userId){
         String userLikeKey = RedisKeyUtil.getUserLikeKey(userId);
         if(redisTemplate.hasKey(userLikeKey)){
-            Set<Integer> members = redisTemplate.opsForSet().members(userLikeKey);
+            List<Integer> members = (List)redisTemplate.opsForSet().members(userLikeKey);
+            return members;
         }else{
             List<Integer> vids = favouriteMapper.selectVideoIdByUserId(userId);
             for (Integer vid:
                  vids) {
                 redisTemplate.opsForSet().add(userLikeKey,vid);
             }
+            return vids;
         }
     }
 }
